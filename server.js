@@ -1,6 +1,7 @@
 const fs=require('fs/promises')
 const path=require('path')
-const express=require('express')
+const express=require('express');
+const { promises } = require('dns');
 const app=express()
 const port=3000;
 
@@ -12,6 +13,15 @@ async function readData(){
     return JSON.parse(data)
 }
 
+async function delayReadData(){
+    await new promise((res,rej)=>{
+
+    setTimeout(resolve,1500);
+
+    })
+    
+    return await readData()
+}
 app.get('/products',async (req,res)=>{
     let products=await readData()
     res.json(products)
