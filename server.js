@@ -23,8 +23,18 @@ async function delayReadData(){
     return await readData()
 }
 app.get('/products',async (req,res)=>{
+    let key=req.url
+    let value=cache[key]
+    try{
+        if(value){
+            return res.json(value)
+        } 
+    
     let products=await readData()
     res.json(products)
+    }catch(err){
+        console.log(err)
+    }
 
 })
 
